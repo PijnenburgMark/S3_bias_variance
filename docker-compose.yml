@@ -1,10 +1,13 @@
-version: '3.8'
 services:
   jupyter:
-    image: jupyter/datascience-notebook
+    image: jupyter/base-notebook:latest
+    container_name: jupyter_notebook
     ports:
       - "8888:8888"
     volumes:
       - .:/home/jovyan/work
-    working_dir: /home/jovyan/work
-    command: ["jupyter", "notebook", "--NotebookApp.token=''"]
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=mijn_wachtwoord
+    command: "start-notebook.sh --NotebookApp.ip=0.0.0.0 --NotebookApp.allow_origin='*'"
+   
